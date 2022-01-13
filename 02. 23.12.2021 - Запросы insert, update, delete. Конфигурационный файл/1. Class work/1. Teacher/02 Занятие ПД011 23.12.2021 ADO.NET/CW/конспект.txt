@@ -1,0 +1,135 @@
+
+
+
+
+// Использование файлов конфигурации позволяет изолировать информацию о подключении 
+// от остальной части приложения 
+    static void Main(string[] args)
+        {
+            // Объект ConnectionStringSettings представляет собой отдельную строку подключения в разделе строк подключения 
+            // конфигурационного файла
+            var setting = new ConnectionStringSettings
+            {
+                Name = "MyConnectionString1",     //имя строки подключения в конфигурационном файле
+                ConnectionString = @"Data Source=.\SQLEXPRESS;
+                                     Initial Catalog=ShopDB;
+                                     Integrated Security=True;"
+            };
+
+            Configuration config;  // Объект Config представляет конфигурационный файл
+            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);  // Объект ConfigurationManager предоставляет доступ к файлам конфигурации
+            config.ConnectionStrings.ConnectionStrings.Add(setting);
+            config.Save();
+
+            Console.WriteLine("Строка подключения записана в конфигурационный файл.");
+
+            // Получение строки подключения.
+            Console.WriteLine(ConfigurationManager.ConnectionStrings["MyConnectionString1"].ConnectionString);
+        }
+		
+
+// использование выходных параметров в параметризированных запросах
+
+ SqlCommand cmd = new SqlCommand("SET @Parameter = 2;", connection);
+
+SqlParameter parameter = cmd.Parameters.Add(new SqlParameter("Parameter", System.Data.SqlDbType.Int));
+parameter.Direction = System.Data.ParameterDirection.Output; // указание направления параметра
+
+connection.Open();
+cmd.ExecuteNonQuery();
+Console.WriteLine("Parameter value: " + parameter.Value); // вывод на экран значения параметра после выполнения запроса
+connection.Close();
+
+
+// Вызов хранимой процедуры с использованием команды EXECUTE T-SQL
+ 
+// код хранимой процедуры selectEmp:  
+// CREATE proc dbo.selectEmp 
+//    as select * from dbo.Employees
+											
+using(SqlConnection connection = new SqlConnection(conStr)) {
+	// создание команды, выполняющей хранимую процедуру selectEmp
+	SqlCommand cmd = new SqlCommand("EXECUT selectEmp", connection); 
+
+	connection.Open();
+
+	SqlDataReader reader = cmd.ExecuteReader();
+
+	while (reader.Read()) {
+		...
+	}
+}
+
+
+// Вызов хранимой процедуры при помощи задания типа команды
+// код хранимой процедуры selectEmp:  CREATE proc dbo.selectEmp 
+//    as select * from dbo.Employees
+
+
+using(SqlConnection connection = new SqlConnection(conStr)) {
+    
+	SqlCommand cmd = new SqlCommand("selectEmp", connection) { 
+	    CommandType = System.Data.CommandType.StoredProcedure 
+	};  
+
+	connection.Open();
+
+	SqlDataReader reader = cmd.ExecuteReader();
+
+	while (reader.Read()){
+        ...
+	}
+} // using
+
+
+// выполнение хранимой процедуры, принимающей параметры
+
+// код хранимой процедуры selectEmp: CREATE proc dbo.proc_p1  @EmployeeID nvarchar(50) 
+								 //    AS 
+								 //    SELECT * from dbo.Employees  
+								 //    WHERE EmployeeID = @EmployeeID  
+using(SqlConnection connection = new SqlConnection(conStr)) {
+
+	Console.WriteLine("Enter employeeID");
+	int employeeID = int.Parse(Console.ReadLine()); // получение данных от пользователя
+
+    // создание команды, вызывающей хранимую процедуру
+	SqlCommand cmd = new SqlCommand("proc_p1", connection) { 
+	    CommandType = System.Data.CommandType.StoredProcedure 
+	}; 
+
+	cmd.Parameters.AddWithValue("@EmployeeID", employeeID); // добавление одного параметра
+
+	connection.Open();
+
+	SqlDataReader reader = cmd.ExecuteReader(); // выполнение команды
+
+	while (reader.Read()) {
+		...
+	}
+} // using
+
+
+// выполнение процедуры, возвращающей значение
+
+// код хранимой процедуры CREATE PROCEDURE ProcedureReturnValue
+					//    AS
+					//    BEGIN
+					//        return 1;
+					//    END
+
+using(SqlConnection connection = new SqlConnection(conStr)) {
+
+	SqlCommand cmd = new SqlCommand("ProcedureReturnValue", connection) { CommandType = System.Data.CommandType.StoredProcedure };
+	SqlParameter parameter = cmd.Parameters.Add(new SqlParameter()); 
+	parameter.Direction = System.Data.ParameterDirection.ReturnValue; // после выполнения комманды parameter будет содержать возвращаемое значение хранимой процедуры 
+   
+	connection.Open();
+
+	cmd.ExecuteNonQuery(); 
+
+	Console.WriteLine(parameter.Value);
+}
+
+// Получение значения автоинкремента с помощью хранимой процедуры - т.е. вернуть @@identity
+// в параметрах команды (parameter.Value), например, после вставки новой записи

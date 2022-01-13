@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "001_ConnectionPooling", "ConnectionPooling\001_ConnectionPooling.csproj", "{1E8AACD6-D57B-4061-A774-38BC6603D24B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "002_SecurityConfig", "SecurityConfig\002_SecurityConfig.csproj", "{E2C0E1A3-5577-4C43-9E21-0E242EF9CFF6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E8AACD6-D57B-4061-A774-38BC6603D24B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E8AACD6-D57B-4061-A774-38BC6603D24B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E8AACD6-D57B-4061-A774-38BC6603D24B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E8AACD6-D57B-4061-A774-38BC6603D24B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2C0E1A3-5577-4C43-9E21-0E242EF9CFF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2C0E1A3-5577-4C43-9E21-0E242EF9CFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2C0E1A3-5577-4C43-9E21-0E242EF9CFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2C0E1A3-5577-4C43-9E21-0E242EF9CFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2344368F-D709-45F6-9F81-79899495CDD3}
+	EndGlobalSection
+EndGlobal

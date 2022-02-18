@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="TestDb">
+  <DataContextMoniker Name="/TestDbDataContext" />
+  <nestedChildShapes>
+    <classShape Id="35bb268d-1ffa-41ff-8665-e4006d5df4e7" absoluteBounds="0.75, 1, 2, 1.3862939453125">
+      <DataClassMoniker Name="/TestDbDataContext/Cities" />
+      <nestedChildShapes>
+        <elementListCompartment Id="695a3424-2cd3-4a01-b5a4-2bd838184393" absoluteBounds="0.765, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0f69e6de-652e-405f-801d-32f5378d44b0" absoluteBounds="3.5, 0.875, 2, 1.5785953776041664">
+      <DataClassMoniker Name="/TestDbDataContext/People" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d9abe7b6-b915-479f-815e-4170893191af" absoluteBounds="3.515, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 1.69314697265625); (3.5 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TestDbDataContext/Cities/Cities_People" />
+      <nodes>
+        <classShapeMoniker Id="35bb268d-1ffa-41ff-8665-e4006d5df4e7" />
+        <classShapeMoniker Id="0f69e6de-652e-405f-801d-32f5378d44b0" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
